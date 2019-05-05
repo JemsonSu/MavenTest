@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.jemson</groupId>
+	<artifactId>MavenTest</artifactId>
+	<version>0.0.1</version>
+
+
+	<dependencies>
+
+
+
+	</dependencies>
+
+
+	<!-- 我常加的maven源 -->
+	<repositories>
+
+		<repository>
+			<id>central</id>
+			<name>central maven</name>
+			<url>http://central.maven.org/maven2/</url>
+		</repository>
+
+		<repository>
+			<id>cloudera</id>
+			<name>cdh</name>
+			<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+		</repository>
+
+		<repository>
+			<id>hortonworks</id>
+			<name>hdp</name>
+			<url>http://repo.hortonworks.com/content/groups/public/</url>
+		</repository>
+
+	</repositories>
+
+
+</project>
