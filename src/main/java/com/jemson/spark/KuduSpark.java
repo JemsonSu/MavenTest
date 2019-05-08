@@ -1,5 +1,10 @@
 package com.jemson.spark;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.DataFrame;
@@ -12,16 +17,23 @@ import org.apache.spark.sql.hive.HiveContext;
  */
 public class KuduSpark {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		System.out.println("开始KuduSpark测试。。。");
+		//获取配置文件信息
+		Properties properties = new Properties();
+		properties.load(new FileInputStream("conf/info.properties"));
+		String master = properties.getProperty("spark.master").trim();
+		//System.out.println("spark.masert = " + master);
+		String sql = properties.getProperty("spark.sql").trim();
+		//System.out.println("spark.sql = " + sql);
 		
 		SparkConf conf = new SparkConf();
-		conf.setMaster("local[2]");
-		conf.setAppName("KuduSpark");
+		//conf.setMaster(master); //线上测试就在脚本设置即可
+		//conf.setAppName("KuduSpark");
 		JavaSparkContext jsc = new JavaSparkContext(conf);
 
 		HiveContext hiveContext = new HiveContext(jsc);
-		DataFrame dataFrame = hiveContext.sql("SELECT count(p__city) c FROM db1.event");
+		DataFrame dataFrame = hiveContext.sql(sql);
 		dataFrame.show();
 		
 		
@@ -32,5 +44,8 @@ public class KuduSpark {
 		System.out.println("测试完毕！！！");
 
 	}
+	
+	
+	
 
 }
