@@ -43,6 +43,7 @@ public class KuduSpark {
 		
 		System.out.println("测试完毕！！！");
 
+		
 	}
 	
 	
