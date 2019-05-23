@@ -19,14 +19,8 @@ public class Test {
 	public static void main(String[] args) throws Exception {
 		
 		
-		URL url = new URL("http://156.234.98.218:5101/sendfile/nginx-2019-04-30_13-22-04_1556601724097.log");
-		URLConnection connection = url.openConnection();
-		
-		BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"));
-		String line =null;
-		while((line=reader.readLine())!=null) {
-			System.out.println(line);
-		}
+		boolean b = "{\"_track_id\":2114341071,\"lib\":{\"$lib\":\"Android\",\"$lib_method\":\"code\",\"$lib_version\":\"3.0.5\",\"$lib_detail\":\"com.bigdata.analytics.android.sdk.BigDataAPI$20##run##BigDataAPI.java##2832\",\"$app_version\":\"1.0\"},\"distinct_id\":\"91d01bfd2966b481\",\"_flush_time\":1557972472716,\"time\":1557972457835,\"type\":\"profile_set\",\"properties\":{\"$carrier\":\"本机或本网络\",\"$country\":\"菲律宾\",\"$city\":\"菲律宾\",\"sex\":\"Male\",\"$province\":\"\",\"$ip\":\"180.190.118.6\",\"email\":\"sjw@163.com\",\"age\":18}}".contains("\"type\":\"profile_set\"");
+		System.out.println(b);
 	}
 
 }

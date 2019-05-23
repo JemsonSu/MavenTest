@@ -21,10 +21,13 @@ public class KuduSpark {
 		System.out.println("开始KuduSpark测试。。。");
 		//获取配置文件信息
 		Properties properties = new Properties();
-		properties.load(new FileInputStream("conf/info.properties"));
-		String master = properties.getProperty("spark.master").trim();
+		//String userDir = System.getProperty("user.dir"); //获取当前项目根目录
+		//System.out.println("|" + userDir + "|"); // |D:\ideaWorkspace\Java201903|
+		//properties.load(new FileInputStream("info.properties"));
+		//String master = properties.getProperty("spark.master").trim();
 		//System.out.println("spark.masert = " + master);
-		String sql = properties.getProperty("spark.sql").trim();
+		//String sql = properties.getProperty("spark.sql").trim();
+		String sql = "SELECT count(p__city) c FROM db1.event";
 		//System.out.println("spark.sql = " + sql);
 		
 		SparkConf conf = new SparkConf();
