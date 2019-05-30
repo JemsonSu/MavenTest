@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -15,8 +17,10 @@ import com.alibaba.fastjson.JSONObject;
 
 public class ImpalaJDBC {
 	
+	public static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	public static void main(String[] args) throws Exception {
+		
 		String driver = "com.cloudera.impala.jdbc41.Driver";
 		String url = "jdbc:impala://156.234.98.50:21050"; // 查看连接机器端口netstat -tnlpu | grep 21050
 		Class.forName(driver);
@@ -56,7 +60,7 @@ public class ImpalaJDBC {
 			if(i%2000==0) {
 				ps.executeBatch();
 				con.commit();
-				System.out.println("目前入db1.person数据量为:"+i); 
+				System.out.println(dtf.format(LocalDateTime.now()) + "  目前入db1.person数据量为:"+i); 
 			}
 			
 		}
@@ -66,13 +70,13 @@ public class ImpalaJDBC {
 		ps.executeBatch();
 		con.commit();
 		con.setAutoCommit(true); 
-		System.out.println("目前入db1.person数据量为:"+count); 
+		System.out.println(dtf.format(LocalDateTime.now()) + " 目前入db1.person数据量为:"+count); 
 		
 		
 		//结束计数
 		long end = System.currentTimeMillis();
 		//计算耗时
-		System.out.println("总耗时"+ ( (end-start)/1000 ) +"秒！即"+ ( (end-start)/1000/60 ) +"分钟");
+		System.out.println(dtf.format(LocalDateTime.now()) + " 总耗时"+ ( (end-start)/1000 ) +"秒！即"+ ( (end-start)/1000/60 ) +"分钟");
 		
 
 
@@ -136,7 +140,7 @@ public class ImpalaJDBC {
 		ResultSet rs = ps.executeQuery();
 		if(rs.next()) {
 			int i = rs.getInt(1);
-			System.out.println("获取db1.person目前最大id为:"+i);
+			System.out.println(dtf.format(LocalDateTime.now()) + " 获取db1.person目前最大id为:"+i);
 			if(i>1) {
 				id=i;
 			}
