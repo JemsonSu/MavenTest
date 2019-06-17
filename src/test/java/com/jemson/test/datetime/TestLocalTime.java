@@ -30,6 +30,24 @@ public class TestLocalTime {
 		System.out.println(lt2.isAfter(lt3) + "  " + lt2.isBefore(lt3)); 
 		
 		
+		System.out.println(LocalTime.now());
+		
+		LocalTime lt4 = LocalTime.parse("00:01:00");
+		System.out.println(lt4);
+		LocalTime lt5 = LocalTime.parse("00:01:59");
+		System.out.println(lt5);
+		
+		
+		LocalTime lt6 = LocalTime.parse("00:01:10");
+		System.out.println(lt6.isAfter(lt4));
+		System.out.println(lt6.isBefore(lt5));
+		
+		System.out.println(lt6.isAfter(lt4)&&lt6.isBefore(lt5));
+		
+		
+		
+		
+		
 	}
 
 }
