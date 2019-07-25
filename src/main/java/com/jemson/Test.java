@@ -1,16 +1,12 @@
 package com.jemson;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.Date;
 
-import org.apache.commons.io.IOUtils;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-
 /**
- * 项目主要测试类，测试完毕即删除测试内容
+ * 
  * @author xian
  *
  */
@@ -18,10 +14,40 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 		System.out.println(new Date());
-		for(int i=1; i<=100; i++) {
-			System.out.println(i);
+		BufferedReader reader = new BufferedReader(
+				new InputStreamReader(new FileInputStream("/root/test/out.log"), "utf-8"));
+		String line = null;
+		while ((line = myReadLine(reader)) != null) {
+			
+			System.out.println("读取data :" + line);
 		}
 		
+	}
+	
+	/**
+	 * 读取一行，并判断是当天时间内
+	 * 
+	 */
+	public static String myReadLine(BufferedReader reader) {
+		// 连读10次 读不了数据重新来读取
+		String line = null;
+		try {
+			while (true) {
+				line = reader.readLine();
+				// System.out.println("line = " + line);
+				if (line == null) {
+					System.out.println("读取数据为空 null data");
+					Thread.sleep(1000);
+					continue;
+				}else {
+					break;
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return line;
 	}
 
 }

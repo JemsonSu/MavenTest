@@ -12,26 +12,17 @@ public class TestExecutorsScheduledThreadPool {
 		System.out.println(LocalDateTime.now());
 		
 		ScheduledExecutorService threadPool = Executors.newScheduledThreadPool(3);
-		//threadPool.schedule(new MyRun(), 3, TimeUnit.SECONDS); //延迟3s执行    只执行一次
-		//threadPool.schedule(new MyThread(), 5, TimeUnit.SECONDS); ////延迟5s执行  只执行一次
+		//threadPool.schedule(new MyRun(), 3, TimeUnit.SECONDS); //寤惰繜3s鎵ц    鍙墽琛屼竴娆�
+		//threadPool.schedule(new MyThread(), 5, TimeUnit.SECONDS); ////寤惰繜5s鎵ц  鍙墽琛屼竴娆�
 		
-		//threadPool.scheduleAtFixedRate(new MyRun(), 3, 5, TimeUnit.SECONDS);  //延迟3s执行    间隔5s 执行一次
-		threadPool.scheduleWithFixedDelay(new MyThread(), 5, 10, TimeUnit.SECONDS);  //延迟5s执行    间隔10s 执行一次
+		//threadPool.scheduleAtFixedRate(new MyRun(), 3, 5, TimeUnit.SECONDS);  //寤惰繜3s鎵ц    闂撮殧5s 鎵ц涓�娆�
+		threadPool.scheduleWithFixedDelay(new MyThread(), 5, 10, TimeUnit.SECONDS);  //寤惰繜5s鎵ц    闂撮殧10s 鎵ц涓�娆�
 		
 
 	}
 
 }
 
-
-class MyRun implements Runnable  {
-
-	@Override
-	public void run() {
-		System.out.println(LocalDateTime.now() + " - " + Thread.currentThread().getId() + " - " +  Thread.currentThread().getName()); 
-		
-	}
-}
 
 class MyThread extends Thread  {
 

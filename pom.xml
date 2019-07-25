@@ -19,6 +19,20 @@
 			<artifactId>spark-core_2.10</artifactId>
 			<version>1.6.0-cdh5.16.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.47</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.6</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.apache.spark</groupId>
@@ -56,11 +70,8 @@
 			<version>1.6.0-cdh5.16.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.cloudera.impala</groupId>
-			<artifactId>jdbc</artifactId>
-			<version>2.5.31</version>
-		</dependency>
+		<!-- <dependency> <groupId>com.cloudera.impala</groupId> <artifactId>jdbc</artifactId> 
+			<version>2.5.31</version> </dependency> -->
 
 		<!-- alibaba fastjson -->
 		<dependency>
@@ -68,6 +79,18 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.58</version>
 		</dependency>
+
+		<!-- <dependency> <groupId>org.apache.kudu</groupId> <artifactId>kudu-client</artifactId> 
+			<version>1.9.0-cdh6.2.0</version> <scope>test</scope> </dependency> -->
+
+		<!-- https://mvnrepository.com/artifact/org.apache.kudu/kudu-client -->
+		<dependency>
+			<groupId>org.apache.kudu</groupId>
+			<artifactId>kudu-client</artifactId>
+			<version>1.9.0</version>
+		</dependency>
+
+
 
 
 
