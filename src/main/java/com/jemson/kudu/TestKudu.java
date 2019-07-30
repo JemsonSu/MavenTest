@@ -32,28 +32,34 @@ public class TestKudu {
 		
 		
 		//具体操作
-		testKudu.findData();
+		//testKudu.listTable();
+		//testKudu.createTable("k_person_8");
+		testKudu.findData("k_person");
+		//testKudu.insertData("k_person_8");
 		
 
 		System.out.println("执行完毕！");
 	}
 	
 	//查找数据
-	public void findData() throws KuduException {
+	public void findData(String tablename) throws KuduException {
 		KuduClient kuduClient = new KuduClient.KuduClientBuilder("r71").defaultAdminOperationTimeoutMs(5 * 1000).build();
-		KuduTable table = kuduClient.openTable("k_person");
+		KuduTable table = kuduClient.openTable(tablename); 
 		
 		KuduScannerBuilder scannerBuilder = kuduClient.newScannerBuilder(table);
 		
 		KuduScanner scanner = scannerBuilder.build();
 		
+		int count=0;
+		
 		while(scanner.hasMoreRows()) {
 			RowResultIterator iterator = scanner.nextRows();
-			System.out.println("本次迭代的行数为:" + iterator.getNumRows());
+			count += iterator.getNumRows();
+			//System.out.println("本次迭代的行数为:" + iterator.getNumRows());
 			while(iterator.hasNext()) {
 				RowResult rowResult = iterator.next();
-				System.out.print("id="+ rowResult.getInt("id") + " ");
-				System.out.print("name="+ rowResult.getString("name") + " ");
+				System.out.print("id= "+ rowResult.getInt("id") + "\t");
+				System.out.print("name= "+ rowResult.getString("name") );
 				
 				System.out.println();
 				
@@ -71,7 +77,7 @@ public class TestKudu {
 			
 			
 		}
-		
+		System.out.println(tablename+"总共数据量:"+ count); 
 		
 		kuduClient.close();
 		
@@ -79,9 +85,9 @@ public class TestKudu {
 	
 	
 	//更新插入数据
-	public void upsertData() throws KuduException {
+	public void upsertData(String tablename) throws KuduException {
 		KuduClient kuduClient = new KuduClient.KuduClientBuilder("r71").defaultAdminOperationTimeoutMs(5 * 1000).build();
-		KuduTable table = kuduClient.openTable("k_person");
+		KuduTable table = kuduClient.openTable(tablename);
 		Upsert upsert = table.newUpsert();
 		PartialRow row = upsert.getRow();
 		row.addInt("id", 11);
@@ -89,16 +95,16 @@ public class TestKudu {
 		
 		KuduSession session = kuduClient.newSession();
 		session.apply(upsert);
-		
+		System.out.println("插入更新"+tablename+"完毕！");
 		kuduClient.close();
 		
 	}
 	
 	
 	//更新数据
-	public void updateData() throws KuduException {
+	public void updateData(String tablename) throws KuduException {
 		KuduClient kuduClient = new KuduClient.KuduClientBuilder("r71").defaultAdminOperationTimeoutMs(5 * 1000).build();
-		KuduTable table = kuduClient.openTable("k_person");
+		KuduTable table = kuduClient.openTable(tablename);
 		Update newUpdate = table.newUpdate();
 		PartialRow row = newUpdate.getRow();
 		row.addInt("id", 2);
@@ -106,31 +112,31 @@ public class TestKudu {
 		
 		KuduSession session = kuduClient.newSession();
 		session.apply(newUpdate);
-		
+		System.out.println("更新"+tablename+"完毕！");
 		kuduClient.close();
 		
 	}
 	
 	
 	//删除数据
-	public void delData() throws KuduException {
+	public void delData(String tablename) throws KuduException {
 		KuduClient kuduClient = new KuduClient.KuduClientBuilder("r71").defaultAdminOperationTimeoutMs(5 * 1000).build();
-		KuduTable table = kuduClient.openTable("k_person");
+		KuduTable table = kuduClient.openTable(tablename);
 		Delete delete = table.newDelete();
 		PartialRow row = delete.getRow();
 		row.addInt("id", 1);
 		
 		KuduSession session = kuduClient.newSession();
 		session.apply(delete);
-		
+		System.out.println("删除"+tablename+"完毕！");
 		kuduClient.close();
 		
 	}
 	
 	//插入数据
-	public void insertData() throws KuduException {
+	public void insertData(String tablename) throws KuduException {
 		KuduClient kuduClient = new KuduClient.KuduClientBuilder("r71").defaultAdminOperationTimeoutMs(5 * 1000).build();
-		KuduTable table = kuduClient.openTable("k_person");
+		KuduTable table = kuduClient.openTable(tablename);
 		/* 单行
 		Insert insert = table.newInsert();
 		PartialRow row = insert.getRow();
@@ -146,7 +152,7 @@ public class TestKudu {
 		 // 采取Flush方式 手动刷新
         session.setFlushMode(FlushMode.MANUAL_FLUSH);
         session.setMutationBufferSpace(3000);
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 1000; i++) {
             Insert insert = table.newInsert();
             // 设置字段内容
             PartialRow row = insert.getRow();
@@ -158,7 +164,7 @@ public class TestKudu {
         }
 		
 		
-		
+		System.out.println("插入"+tablename+"表数据完毕！");
 		kuduClient.close();
 	}
 
@@ -167,10 +173,10 @@ public class TestKudu {
 	
 	
 	//删除表
-	public void delTable() throws KuduException {
+	public void delTable(String tablename) throws KuduException {
 		KuduClient kuduClient = new KuduClient.KuduClientBuilder("r71").defaultAdminOperationTimeoutMs(5 * 1000).build();
-		DeleteTableResponse response = kuduClient.deleteTable("k_person");
-		
+		DeleteTableResponse response = kuduClient.deleteTable(tablename);
+		System.out.println("删除"+tablename+"表完毕！");
 		kuduClient.close();
 	}
 	
@@ -190,7 +196,7 @@ public class TestKudu {
 	
 
 	//创建表
-	public void createTable() throws KuduException {
+	public void createTable(String tablename) throws KuduException {
 		// 创建客户端
 		// KuduClient kuduClient = new KuduClient.KuduClientBuilder("r71").defaultAdminOperationTimeoutMs(5*1000).build();
 		KuduClient kuduClient = new KuduClient.KuduClientBuilder("r71:7051").defaultAdminOperationTimeoutMs(5 * 1000).build();
@@ -199,7 +205,9 @@ public class TestKudu {
 
 		// 创建kudu表要准备的信息
 		// 1 . 表名
-		String tablename = "k_person";
+		//String tablename = "k_person_default"; //不设置副本数
+		//String tablename = "k_person"; //设置副本数 - 1
+		//String tablename = "k_person_6"; //设置副本数 - 1    主要副本数只能是奇数个 1,3,5,7   illegal replication factor 2 (replication factor must be odd)
 		// 2.schema 里面包含字段信息
 		List<ColumnSchema> columns = new ArrayList<ColumnSchema>();
 		columns.add(new ColumnSchema.ColumnSchemaBuilder("id", Type.INT32).key(true).build()); // 主键(一部分)
@@ -207,8 +215,8 @@ public class TestKudu {
 		Schema schema = new Schema(columns);
 		// 3.相关选项 副本，分区，分桶等信息
 		CreateTableOptions options = new CreateTableOptions();
-		options.setNumReplicas(1); // 设置副本数
-		options.addHashPartitions(Arrays.asList("id"), 2); // 分区必须要设置
+		//options.setNumReplicas(1); // 设置副本数
+		options.addHashPartitions(Arrays.asList("id"), 4); // 分区必须要设置
 
 		// 通过客户端创建表
 		kuduClient.createTable(tablename, schema, options);
@@ -216,7 +224,7 @@ public class TestKudu {
 		// 关闭客户端
 		kuduClient.close();
 
-		System.out.println("创建kudu表k_person完毕！");
+		System.out.println("创建kudu表"+tablename+"完毕！");
 	}
 
 }
