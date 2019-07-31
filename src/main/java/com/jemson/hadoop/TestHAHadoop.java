@@ -24,7 +24,7 @@ public class TestHAHadoop {
 	    FileSystem fs = FileSystem.newInstance(new URI(""),conf,"sjw"); //最后一个参数是用户名
 
 	    //下载例子
-	    fs.copyFromLocalFile(new Path("/user/sjw/event_define/event_define.csv"),new Path("/home"));
+	    fs.copyToLocalFile(new Path("/user/sjw/event_define/event_define.csv"),new Path("/home"));
 
 	    System.out.println("完毕!!!");
 
