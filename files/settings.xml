@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <localRepository>D:/maven_repo</localRepository>
+
+
+    <mirrors>
+        <!-- 阿里及其代理库 -->
+        <mirror>
+            <id>aliyunmaven</id>
+            <mirrorOf>*</mirrorOf>
+            <name>阿里云公共仓库</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </mirror>
+
+        <mirror>
+            <id>central</id>
+            <mirrorOf>*</mirrorOf>
+            <name>central</name>
+            <url>https://maven.aliyun.com/nexus/content/repositories/central</url>
+        </mirror>
+
+        <mirror>
+            <id>jcenter</id>
+            <mirrorOf>*</mirrorOf>
+            <name>jcenter</name>
+            <url>https://maven.aliyun.com/repository/jcenter</url>
+        </mirror>
+        <mirror>
+            <id>public</id>
+            <mirrorOf>*</mirrorOf>
+            <name>public</name>
+            <url>https://maven.aliyun.com/nexus/content/groups/public</url>
+        </mirror>
+        <mirror>
+            <id>google_1</id>
+            <mirrorOf>*</mirrorOf>
+            <name>google_1</name>
+            <url>https://maven.aliyun.com/repository/google</url>
+        </mirror>
+        <mirror>
+            <id>google_2</id>
+            <mirrorOf>*</mirrorOf>
+            <name>google_2</name>
+            <url>https://maven.aliyun.com/nexus/content/repositories/google</url>
+        </mirror>
+        <mirror>
+            <id>gradle-plugin</id>
+            <mirrorOf>*</mirrorOf>
+            <name>gradle-plugin</name>
+            <url>https://maven.aliyun.com/nexus/content/repositories/gradle-plugin</url>
+        </mirror>
+        <mirror>
+            <id>gradle-plugin</id>
+            <mirrorOf>*</mirrorOf>
+            <name>gradle-plugin</name>
+            <url>https://maven.aliyun.com/nexus/content/repositories/gradle-plugin</url>
+        </mirror>
+
+        <mirror>
+            <id>spring</id>
+            <mirrorOf>*</mirrorOf>
+            <name>spring</name>
+            <url>https://maven.aliyun.com/nexus/content/repositories/spring</url>
+        </mirror>
+        <mirror>
+            <id>spring-plugin</id>
+            <mirrorOf>*</mirrorOf>
+            <name>spring-plugin</name>
+            <url>https://maven.aliyun.com/nexus/content/repositories/spring-plugin</url>
+        </mirror>
+        <mirror>
+            <id>grails-core</id>
+            <mirrorOf>*</mirrorOf>
+            <name>grails-core</name>
+            <url>https://maven.aliyun.com/nexus/content/repositories/grails-core</url>
+        </mirror>
+        <mirror>
+            <id>apache snapshots</id>
+            <mirrorOf>*</mirrorOf>
+            <name>apache snapshots</name>
+            <url>https://maven.aliyun.com/nexus/content/repositories/apache-snapshots</url>
+        </mirror>
+
+
+        <!-- 网易163 -->
+        <mirror>
+            <id>nexus-163</id>
+            <mirrorOf>*</mirrorOf>
+            <name>Nexus 163</name>
+            <url>http://mirrors.163.com/maven/repository/maven-public/</url>
+        </mirror>
+
+    </mirrors>
+
+
+    <profiles>
+        <profile>
+
+            <properties>
+                <repository>
+                    <id>spring</id>
+                    <url>https://maven.aliyun.com/repository/spring</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
+            </properties>
+        </profile>
+    </profiles>
+
+</settings>
