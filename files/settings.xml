@@ -93,6 +93,27 @@
             <url>http://mirrors.163.com/maven/repository/maven-public/</url>
         </mirror>
 
+        <!-- 大数据 -->
+        <mirror>
+            <id>central</id>
+            <mirrorOf>*</mirrorOf>
+            <name>central maven</name>
+            <url>http://central.maven.org/maven2/</url>
+        </mirror>
+
+        <mirror>
+            <id>cloudera</id>
+            <mirrorOf>*</mirrorOf>
+            <name>cdh</name>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </mirror>
+        <mirror>
+            <id>hortonworks</id>
+            <mirrorOf>*</mirrorOf>
+            <name>hdp</name>
+            <url>http://repo.hortonworks.com/content/groups/public/</url>
+        </mirror>
+
     </mirrors>
 
 
@@ -113,5 +134,7 @@
             </properties>
         </profile>
     </profiles>
+
+
 
 </settings>
